@@ -1,0 +1,59 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+    //Defining the variables
+    double temp, windSpeed, windChillF, dewPoint, computedCloudBase;
+    //Defining the function that calculates wind chill
+    void windChill();
+    //Defining the function that computes cloud base using the dew point
+    void cloudBase();
+    //Defining the function that controls display
+    void display();
+    //Defining the function that takes the user's input
+    void input();
+
+int main()
+{
+
+    //Creates the opening screen that appears upon opening the program
+        cout << "__________________________________________________\n";
+        cout << "|                                                |\n";
+        cout << "|      This program allows you to input the      |\n";
+        cout << "| temperature and dew point in Fahrenheit along  |\n";
+        cout << "|   with the wind speed to calculate the wind    |\n";
+        cout << "|      chill and cloud base at 0 elevation.      |\n";
+        cout << "|________________________________________________|\n\n\n";
+    input();
+    windChill();
+    cloudBase();
+    display();
+    return 0;
+}
+
+void windChill() {
+      windChillF = 35.74 + ((0.6215 * temp) - (35.75 * (pow(windSpeed,0.16)))) + (0.4275 * temp * (pow(windSpeed,0.16)));
+
+    }
+
+void cloudBase() {
+    computedCloudBase = ((temp - dewPoint) / 4.4) * 1000;
+
+    }
+
+void display() {
+    cout << "\n\nTemperature | Wind Speed | Wind Chill | Dew Point | Cloud Base\n";
+    cout << "____________|____________|____________|___________|____________\n";
+    cout << "    " << temp << "(F)   |" << "    " << windSpeed << "MPH   |" << "    " << round(windChillF) << "(F)   |" << "   " << dewPoint << "(F)   |" << " " << computedCloudBase << "(ft)\n";
+
+    }
+
+void input() {
+        cout << "Enter the current temperature in Fahrenheit: ";
+        cin >> temp;
+        cout << "\nEnter the current wind speed in MPH: ";
+        cin >> windSpeed;
+        cout << "\nEnter the current Dew Point: ";
+        cin >> dewPoint;
+    }

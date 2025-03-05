@@ -3,7 +3,6 @@
 
 using namespace std;
 
-    //Defining the variables
     double temp, windSpeed, windChillF, dewPoint, computedCloudBase;
     //Defining the function that calculates wind chill
     void windChill();
@@ -43,17 +42,40 @@ void cloudBase() {
     }
 
 void display() {
-    cout << "\n\nTemperature | Wind Speed | Wind Chill | Dew Point | Cloud Base\n";
-    cout << "____________|____________|____________|___________|____________\n";
-    cout << "    " << temp << "(F)   |" << "    " << windSpeed << "MPH   |" << "    " << round(windChillF) << "(F)   |" << "   " << dewPoint << "(F)   |" << " " << computedCloudBase << "(ft)\n";
+    cout << "\n\n Temperature   Wind Speed   Wind Chill   Dew Point   Cloud Base\n";
+    cout << "-------------------------------------------------------------------\n";
+    cout << "  " << temp << "(F)         " << windSpeed << "MPH        " << round(windChillF) << "(F)        " << dewPoint << "(F)       " << computedCloudBase << "(ft)\n";
 
     }
 
 void input() {
         cout << "Enter the current temperature in Fahrenheit: ";
         cin >> temp;
+            while (cin.fail()) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "\nPlease enter only numbers\n";
+                cout << "Enter the current temperature in Fahrenheit: ";
+                cin >> temp;
+        }
         cout << "\nEnter the current wind speed in MPH: ";
         cin >> windSpeed;
+            while (cin.fail()) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "\nPlease enter only numbers\n";
+                cout << "Enter the current wind speed in MPH: ";
+                cin >> temp;
+        }
         cout << "\nEnter the current Dew Point: ";
         cin >> dewPoint;
+            while (cin.fail()) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "\nPlease enter only numbers\n";
+                cout << "Enter the current dew point: ";
+                cin >> temp;
+        }
+
     }
+

@@ -3,7 +3,7 @@
 
 using namespace std;
 
-    double temp, windSpeed, windChillF, dewPoint, computedCloudBase;
+    double temp, windSpeed, windChillF, dewPoint, computedCloudBase, altitude;
     //Defining the function that calculates wind chill
     void windChill();
     //Defining the function that computes cloud base using the dew point
@@ -21,8 +21,8 @@ int main()
         cout << "|                                                |\n";
         cout << "|      This program allows you to input the      |\n";
         cout << "| temperature and dew point in Fahrenheit along  |\n";
-        cout << "|   with the wind speed to calculate the wind    |\n";
-        cout << "|      chill and cloud base at 0 elevation.      |\n";
+        cout << "| with the wind speed and altitude to calculate  |\n";
+        cout << "|          the wind chill and cloud base         |\n";
         cout << "|________________________________________________|\n\n\n";
     input();
     windChill();
@@ -37,7 +37,7 @@ void windChill() {
     }
 
 void cloudBase() {
-    computedCloudBase = ((temp - dewPoint) / 4.4) * 1000;
+    computedCloudBase = (((temp - dewPoint) / 4.4) * 1000) + altitude;
 
     }
 
@@ -51,6 +51,7 @@ void display() {
 void input() {
         cout << "Enter the current temperature in Fahrenheit: ";
         cin >> temp;
+        //Does not allow the user to input characters and tells them to use integers
             while (cin.fail()) {
                 cin.clear();
                 cin.ignore(10000, '\n');
@@ -76,6 +77,15 @@ void input() {
                 cout << "Enter the current dew point: ";
                 cin >> temp;
         }
-
+        cout << "\nEnter the current altitude in feet: ";
+        cin >> altitude;
+        //Does not allow the user to input characters and tells them to use integers
+            while (cin.fail()) {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "\nPlease enter only numbers\n";
+                cout << "Enter the altitude in feet: ";
+                cin >> altitude;
+            }
     }
 

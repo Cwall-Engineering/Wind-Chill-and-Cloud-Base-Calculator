@@ -3,12 +3,7 @@
 #include <string>
 #include <sstream>
 using namespace std;
-    //Defines variables and strings
 
-    string input1;
-    string input2;
-    string input3;
-    string input4;
     //Defining the function that takes the user's input
     void input(double&temp, double&windSpeed, double&windChill, double&dewPoint, double&cloudBase, double&altitude);
     //Defining the function that calculates wind chill
@@ -48,6 +43,10 @@ void display(double&temp, double&windSpeed, double&windChill, double&dewPoint, d
     }
     //Takes each input and determines whether the input is valid or not
 void input(double&temp, double&windSpeed, double&windChill, double&dewPoint, double&cloudBase, double&altitude) {
+    string input1;
+    string input2;
+    string input3;
+    string input4;
         cout << "Enter the current temperature in Fahrenheit: ";
 
          getline (cin, input1);

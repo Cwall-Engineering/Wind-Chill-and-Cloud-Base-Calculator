@@ -4,14 +4,14 @@
 #include <sstream>
 using namespace std;
 
-    //Defining the function that takes the user's input
-    void input(double&temp, double&windSpeed, double&windChill, double&dewPoint, double&cloudBase, double&altitude);
-    //Defining the function that calculates wind chill
-    double windChill(double&temp, double&windSpeed);
-    //Defining the function that computes cloud base using the dew point
-    double cloudBase(double&temp, double&dewPoint, double&altitude);
-    //Defining the function that controls display
-    void display(double&temp, double&windSpeed, double&windChill, double&dewPoint, double&cloudBase, double&altitude);
+//Defining the function that takes the user's input
+void input(double&temp, double&windSpeed, double&dewPoint, double&altitude);
+//Defining the function that calculates wind chill
+double windChill(double&temp, double&windSpeed);
+//Defining the function that computes cloud base using the dew point
+double cloudBase(double&temp, double&dewPoint, double&altitude);
+//Defining the function that controls display
+void display(double&temp, double&windSpeed, double&windChill, double&dewPoint, double&cloudBase, double&altitude);
 
 
 int main()
@@ -25,7 +25,7 @@ int main()
         cout << "| with the wind speed and altitude to calculate  |\n";
         cout << "|          the wind chill and cloud base         |\n";
         cout << "|________________________________________________|\n\n\n";
-    input(temp, windSpeed, windChill, dewPoint, cloudBase, altitude);
+    input(temp, windSpeed, dewPoint, altitude);
     //Calculates the Wind Chill
     windChill = 35.74 + ((0.6215 * temp) - (35.75 * (pow(windSpeed,0.16)))) + (0.4275 * temp * (pow(windSpeed,0.16)));
     //Calculates the Cloud Base
@@ -42,7 +42,8 @@ void display(double&temp, double&windSpeed, double&windChill, double&dewPoint, d
 
     }
     //Takes each input and determines whether the input is valid or not
-void input(double&temp, double&windSpeed, double&windChill, double&dewPoint, double&cloudBase, double&altitude) {
+void input(double&temp, double&windSpeed, double&dewPoint, double&altitude) {
+    //Each string validates an input
     string input1;
     string input2;
     string input3;
@@ -111,4 +112,3 @@ void input(double&temp, double&windSpeed, double&windChill, double&dewPoint, dou
                 cin >> altitude;
             }
     }
-

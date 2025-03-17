@@ -1,21 +1,27 @@
 #include <iostream>
 #include <cmath>
-
+#include <string>
+#include <sstream>
 using namespace std;
+    //Defines variables and strings
 
-    double temp, windSpeed, windChillF, dewPoint, computedCloudBase, altitude;
-    //Defining the function that calculates wind chill
-    void windChill();
-    //Defining the function that computes cloud base using the dew point
-    void cloudBase();
-    //Defining the function that controls display
-    void display();
+    string input1;
+    string input2;
+    string input3;
+    string input4;
     //Defining the function that takes the user's input
-    void input();
+    void input(double&temp, double&windSpeed, double&windChill, double&dewPoint, double&cloudBase, double&altitude);
+    //Defining the function that calculates wind chill
+    double windChill(double&temp, double&windSpeed);
+    //Defining the function that computes cloud base using the dew point
+    double cloudBase(double&temp, double&dewPoint, double&altitude);
+    //Defining the function that controls display
+    void display(double&temp, double&windSpeed, double&windChill, double&dewPoint, double&cloudBase, double&altitude);
+
 
 int main()
 {
-
+    double temp, windSpeed, windChill, dewPoint, cloudBase, altitude;
     //Creates the opening screen that appears upon opening the program
         cout << "__________________________________________________\n";
         cout << "|                                                |\n";
@@ -24,67 +30,85 @@ int main()
         cout << "| with the wind speed and altitude to calculate  |\n";
         cout << "|          the wind chill and cloud base         |\n";
         cout << "|________________________________________________|\n\n\n";
-    input();
-    windChill();
-    cloudBase();
-    display();
+    input(temp, windSpeed, windChill, dewPoint, cloudBase, altitude);
+    //Calculates the Wind Chill
+    windChill = 35.74 + ((0.6215 * temp) - (35.75 * (pow(windSpeed,0.16)))) + (0.4275 * temp * (pow(windSpeed,0.16)));
+    //Calculates the Cloud Base
+    cloudBase = (((temp - dewPoint) / 4.4) * 1000) + altitude;
+    display(temp, windSpeed, windChill, dewPoint, cloudBase, altitude);
     return 0;
 }
 
-void windChill() {
-      windChillF = 35.74 + ((0.6215 * temp) - (35.75 * (pow(windSpeed,0.16)))) + (0.4275 * temp * (pow(windSpeed,0.16)));
-
-    }
-
-void cloudBase() {
-    computedCloudBase = (((temp - dewPoint) / 4.4) * 1000) + altitude;
-
-    }
-
-void display() {
+    //Presents the final display
+void display(double&temp, double&windSpeed, double&windChill, double&dewPoint, double&cloudBase, double&altitude) {
     cout << "\n\n Temperature   Wind Speed   Wind Chill   Dew Point   Cloud Base\n";
     cout << "-------------------------------------------------------------------\n";
-    cout << "  " << temp << "(F)         " << windSpeed << "MPH        " << round(windChillF) << "(F)        " << dewPoint << "(F)       " << computedCloudBase << "(ft)\n";
+    cout << "  " << temp << "(F)         " << windSpeed << "MPH        " << round(windChill) << "(F)        " << dewPoint << "(F)       " << cloudBase << "(ft)\n";
 
     }
-
-void input() {
+    //Takes each input and determines whether the input is valid or not
+void input(double&temp, double&windSpeed, double&windChill, double&dewPoint, double&cloudBase, double&altitude) {
         cout << "Enter the current temperature in Fahrenheit: ";
-        cin >> temp;
-        //Does not allow the user to input characters and tells them to use integers
-            while (cin.fail()) {
-                cin.clear();
-                cin.ignore(10000, '\n');
-                cout << "\nPlease enter only numbers\n";
-                cout << "Enter the current temperature in Fahrenheit: ";
+
+         getline (cin, input1);
+         stringstream ss(input1);
+
+        if (ss >> temp) {
+                 char leftover;
+            if (ss >> leftover) {
+                cout << "The input is invalid, use only whole numbers: ";
                 cin >> temp;
+            }
         }
+            else {
+                cout << "The input is invalid, use only whole numbers: ";
+                cin >> temp;
+            }
+
         cout << "\nEnter the current wind speed in MPH: ";
-        cin >> windSpeed;
-            while (cin.fail()) {
-                cin.clear();
-                cin.ignore(10000, '\n');
-                cout << "\nPlease enter only numbers\n";
-                cout << "Enter the current wind speed in MPH: ";
-                cin >> temp;
+            cin >> input2;
+            stringstream aa(input2);
+            if (aa >> windSpeed) {
+                 char leftover;
+            if (aa >> leftover) {
+                cout << "The input is invalid, use only whole numbers: ";
+                cin >> windSpeed;
+            }
         }
+            else {
+                cout << "The input is invalid, use only whole numbers: ";
+                cin >> windSpeed;
+            }
+
         cout << "\nEnter the current Dew Point: ";
-        cin >> dewPoint;
-            while (cin.fail()) {
-                cin.clear();
-                cin.ignore(10000, '\n');
-                cout << "\nPlease enter only numbers\n";
-                cout << "Enter the current dew point: ";
-                cin >> temp;
+            cin >> input3;
+            stringstream bb(input3);
+            if (bb >> dewPoint) {
+                 char leftover;
+            if (bb >> leftover) {
+                cout << "The input is invalid, use only whole numbers: ";
+                cin >> dewPoint;
+            }
         }
+            else {
+                cout << "The input is invalid, use only whole numbers: ";
+                cin >> dewPoint;
+            }
+
+
         cout << "\nEnter the current altitude in feet: ";
-        cin >> altitude;
         //Does not allow the user to input characters and tells them to use integers
-            while (cin.fail()) {
-                cin.clear();
-                cin.ignore(10000, '\n');
-                cout << "\nPlease enter only numbers\n";
-                cout << "Enter the altitude in feet: ";
+           cin >> input4;
+            stringstream cc(input4);
+            if (cc >> altitude) {
+                 char leftover;
+            if (cc >> leftover) {
+                cout << "The input is invalid, use only whole numbers: ";
+                cin >> altitude;
+            }
+        }
+            else {
+                cout << "The input is invalid, use only whole numbers: ";
                 cin >> altitude;
             }
     }

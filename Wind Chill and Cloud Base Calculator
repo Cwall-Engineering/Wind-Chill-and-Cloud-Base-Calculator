@@ -7,9 +7,9 @@ using namespace std;
 //Defining the function that takes the user's input
 void input(double&temp, double&windSpeed, double&dewPoint, double&altitude);
 //Defining the function that calculates wind chill
-double windChill(double&temp, double&windSpeed);
+double windChillF(double&temp, double&windSpeed);
 //Defining the function that computes cloud base using the dew point
-double cloudBase(double&temp, double&dewPoint, double&altitude);
+double calculatedCloudBase(double&temp, double&dewPoint, double&altitude);
 //Defining the function that controls display
 void display(double&temp, double&windSpeed, double&windChill, double&dewPoint, double&cloudBase, double&altitude);
 
@@ -27,9 +27,9 @@ int main()
         cout << "|________________________________________________|\n\n\n";
     input(temp, windSpeed, dewPoint, altitude);
     //Calculates the Wind Chill
-    windChill = 35.74 + ((0.6215 * temp) - (35.75 * (pow(windSpeed,0.16)))) + (0.4275 * temp * (pow(windSpeed,0.16)));
+    windChill = windChillF(temp, windSpeed);
     //Calculates the Cloud Base
-    cloudBase = (((temp - dewPoint) / 4.4) * 1000) + altitude;
+    cloudBase = calculatedCloudBase(temp, dewPoint, altitude);
     display(temp, windSpeed, windChill, dewPoint, cloudBase, altitude);
     return 0;
 }
@@ -38,7 +38,7 @@ int main()
 void display(double&temp, double&windSpeed, double&windChill, double&dewPoint, double&cloudBase, double&altitude) {
     cout << "\n\n Temperature   Wind Speed   Wind Chill   Dew Point   Cloud Base\n";
     cout << "-------------------------------------------------------------------\n";
-    cout << "  " << temp << "(F)         " << windSpeed << "MPH        " << round(windChill) << "(F)        " << dewPoint << "(F)       " << cloudBase << "(ft)\n";
+    cout << "  " << temp << "(F)         " << windSpeed << "MPH        " << round(windChill) << "(F)        " << dewPoint << "(F)       " << round(cloudBase) << "(ft)\n";
 
     }
     //Takes each input and determines whether the input is valid or not
@@ -112,3 +112,15 @@ void input(double&temp, double&windSpeed, double&dewPoint, double&altitude) {
                 cin >> altitude;
             }
     }
+
+   double windChillF(double&temp, double&windSpeed) {
+       double windChill;
+        windChill = 35.74 + ((0.6215 * temp) - (35.75 * (pow(windSpeed,0.16)))) + (0.4275 * temp * (pow(windSpeed,0.16)));
+        return windChill;
+   }
+
+   double calculatedCloudBase(double&temp, double&dewPoint, double&altitude) {
+       double cloudBase;
+        cloudBase = (((temp - dewPoint) / 4.4) * 1000) + altitude;
+        return cloudBase;
+   }
